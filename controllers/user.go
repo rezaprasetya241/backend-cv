@@ -11,16 +11,7 @@ import (
 func GetUser(c *gin.Context) {
 	var UserDetails models.User
 	id := c.Param("id")
-	//if err := models.DB.Preload("Education").Preload("Certificate").Preload("Skill").Preload("Experiences").First(&UserDetails, id).Error; err != nil {
-	//	switch err {
-	//	case gorm.ErrRecordNotFound:
-	//		c.AbortWithStatusJSON(http.StatusNotFound, gin.H{"message": "Data tidak ditemukan"})
-	//		return
-	//	default:
-	//		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
-	//		return
-	//	}
-	//}
+	//Preload(clause.Associations).Preload("Experiences."+clause.Associations).Preload("Portofolio."+clause.Associations)
 	if err := models.DB.Preload(clause.Associations).Preload("Experiences."+clause.Associations).Preload("Portofolio."+clause.Associations).First(&UserDetails, id).Error; err != nil {
 		switch err {
 		case gorm.ErrRecordNotFound:
